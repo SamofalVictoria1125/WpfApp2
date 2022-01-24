@@ -1,0 +1,57 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Редактор котов" Height="450" Width="800" Background="Bisque">
+    <Window.Resources>
+        <ContextMenu x:Key="listMenu">
+            <MenuItem Header="Добавить котяуса" Click="AddCat"/>
+            <MenuItem Header="Удалить котяуса" Click="DeleteCat"/>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Каталог о котяусах">
+                <MenuItem Header="Дикие породы" Click="OpenDic"/>
+                <MenuItem Header="Сведения о хозяине" Click="OpenXozs"/>
+                <MenuItem Header="Исчезнувшие породы" Click="OpenIshs"/>
+            </MenuItem>
+        </Menu>
+        <ListBox Grid.Row="1" SelectedItem="{Binding SelectedCat}"
+                 ItemsSource="{Binding Cats}" 
+                 DisplayMemberPath="Name" 
+                 ContextMenu="{StaticResource listMenu}" Margin="10,56.4,35.8,33"
+                 >
+            <ListBox.Background>
+                <ImageBrush ImageSource="da2c52w-50c336c6-1b75-4537-9b32-8da43ed01714.png"/>
+            </ListBox.Background>
+        </ListBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <StackPanel 
+                DataContext="{Binding SelectedCat}"
+                Orientation="Vertical">
+                <Label Content="Порода"/>
+                <TextBox Text="{Binding Poroda}"/>
+                <Label FontStyle="Italic" Content="Имя"/>
+                <TextBox Text="{Binding Name}"/>
+                <Label FontStyle="Oblique" Content="Происхождение"/>
+                <TextBox Text="{Binding Sem}"/>
+                <Label Content="Дата рождения"/>
+                <DatePicker SelectedDate="{Binding Birthday}" />
+                <Label Content="Потомство"/>
+                <TextBox Text="{Binding Pot}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

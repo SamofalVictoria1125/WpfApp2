@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp2.XozsWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Сведения о хозяине" Height="450" Width="800" Background="AntiqueWhite">
+    <Window.Resources>
+        <ContextMenu x:Key="listMenu">
+            <MenuItem Header="Добавить" Click="AddXozs"/>
+            <MenuItem Header="Удалить" Click="DeleteXozs"/>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Xozss}" 
+                 SelectedItem="{Binding SelectedXozs}"
+                 DisplayMemberPath="LastName"
+                 ContextMenu="{StaticResource listMenu}"/>
+        <StackPanel Grid.Column="1" DataContext="{Binding SelectedXozs}">
+            <Label Content="Имя"/>
+            <TextBox Text="{Binding FirstName}"/>
+            <Label Content="Отчество"/>
+            <TextBox Text="{Binding Patronymic}"/>
+            <Label Content="Фамилия"/>
+            <TextBox Text="{Binding LastName}"/>
+        </StackPanel>
+    </Grid>
+</Window>
